@@ -1,20 +1,25 @@
 import os
-import threading
+from threading import Thread
 from datetime import datetime
 
 
-class TurnOff_By_Time(threading.Thread):
-    def __init__(self, time_when_power_off):
-        super().__init__()
+class TurnOff_By_Time:
+    def __init__(self):
+        self.running = False
+        self.thread = Thread(target=self.run)
+        self.time_when_power_off = None
+
+    def set_data(self, time_when_power_off):
         self.time_when_power_off = datetime(year=datetime.now().year,
                                             month=datetime.now().month,
                                             day=datetime.now().day,
                                             hour=int(time_when_power_off[0:2]),
                                             minute=int(time_when_power_off[3:5]),
                                             )
-        # print("Хорошо, я выключу в ", self.time_when_power_off)
-        # while True:
-        #     self.check()
+        print("Хорошо, я выключу в ", self.time_when_power_off)
+        if not self.running:
+            self.running = True
+            self.thread.start()
 
     def check(self):
         if self.time_when_power_off == datetime.now():
@@ -22,6 +27,5 @@ class TurnOff_By_Time(threading.Thread):
             # os.system("poweroff")
 
     def run(self):
-        print("Хорошо, я выключу в ", self.time_when_power_off)     # вывод исправлю
-        while True:
+        while self.running:
             self.check()
