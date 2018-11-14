@@ -1,6 +1,6 @@
 import os
 from threading import Thread
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class TurnOff_By_Time:
@@ -20,6 +20,10 @@ class TurnOff_By_Time:
         if not self.running:
             self.running = True
             self.thread.start()
+
+    def time_to_shutdown(self, ):
+        # time_input -> 00:00:00
+        return timedelta(self.time_when_power_off - datetime.now())
 
     def check(self):
         if self.time_when_power_off == datetime.now():
