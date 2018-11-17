@@ -2,6 +2,8 @@ import bs4
 import requests
 import re
 import os
+from pprint import pprint
+from urllib3.connectionpool import InsecureRequestWarning
 
 
 class Parser:
@@ -32,7 +34,7 @@ class Parser:
 
         except AttributeError:
             try:
-                f = open('index.html')
+                f = open('../test/index.html')
                 html = f.read()
                 f.close()
 
@@ -108,11 +110,6 @@ class Parser:
                 else:
                     return d
 
-    def main(self):
-        print('Неделя:', self.get_number_of_week())
-        # print(self.get_rasp())
-        print(Parser().search_day(day=input('День: '), only_rasp=True))
-
 
 if __name__ == '__main__':
-    Parser().main()
+    pass
