@@ -8,6 +8,12 @@ from modules.gui import ChildWindow
 from test.true_parser import Parser
 
 
+#
+# ToDo:
+# -- если запуск просиходи позже время когда должен ложиться спать - сообщить об этом
+#
+
+
 class DreamControl:
     def __init__(self):
         print('Dream_control: активирован')

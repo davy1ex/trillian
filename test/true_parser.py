@@ -34,13 +34,16 @@ class Parser:
 
         except AttributeError:
             try:
-                f = open('../test/index.html')
+                print('Онлайн версия не работает.')
+                f = open('test/index.html')
                 html = f.read()
                 f.close()
+                print('Загрузил оффлайн версию.')
 
                 return html
+
             except FileNotFoundError:
-                print('Сайт не работает, а оффлайн версии нет.')
+                print('Оффлайн версия расписание не найдена.')
                 quit()
 
     def get_number_of_week(self):

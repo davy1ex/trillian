@@ -4,9 +4,22 @@ from pprint import pprint
 
 def main():
     # html = requests.get('https://ssau.ru/rasp?group=6161-110501D', verify=False).text
-    html = open('Расписание - Самарский университет.html').read()
+    html = open('index.html').read()
     soup = bs4.BeautifulSoup(html, 'lxml')
     week = int(soup.find('p', {'class': 'nav-link pl-1 mb-0'}).text.split()[0])
+
+    lessons = [
+        'математика',
+        'иностранный',
+        'физика',
+        'физико',
+        'информационные',
+        'линейная',
+        'введение',
+        'физическая',
+        'история',
+    ]
+
     print('Неделя: ', end = '')
     if week % 2 == 0:
         print('чётная ', end='')

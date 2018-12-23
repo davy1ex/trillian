@@ -1,6 +1,15 @@
+import os
+
 from threading import Thread
 from datetime import datetime
 from time import sleep
+
+
+#
+# ToDO:
+# -- определить что это за система и какой к ней нужен подход
+# -- вывести уведомление об отключении за 5 минут
+#
 
 
 class ShutdownByTime:
@@ -27,7 +36,8 @@ class ShutdownByTime:
 
     def check(self):
         sleep(int(self.time_to_shutdown()))
-        print('*выключил*')
+        # print('*выключил*')
+        os.system("shutdown -l")
 
     def run(self):
         self.check()
