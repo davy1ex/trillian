@@ -1,10 +1,10 @@
-import tkinter as tk
+# import tkinter as tk
 
 from datetime import datetime, timedelta
 from threading import Thread
 from time import sleep
 
-from modules.gui import ChildWindow
+# from modules.gui import ChildWindow
 from test.true_parser import Parser
 
 
@@ -16,7 +16,7 @@ from test.true_parser import Parser
 
 class DreamControl:
     def __init__(self):
-        print('Dream_control: активирован')
+        print('Модуль \'Dream_control\' активирован')
         self.time_when_wake_up = datetime(
             year=datetime.now().year,
             month=datetime.now().month,
@@ -34,21 +34,22 @@ class DreamControl:
         #     minute=00,
         #     second=00
         # )
-        self.time_when_must_go_to_sleep = self.calculate_time_when_must_go_to_sleep()
-        self.Thread = Thread(target=self.run)
+
 
         self.running = False
         self.tomorrow_learn = True
 
         self.time_now = None
         self.time_to_sleep = 0
+        self.time_when_must_go_to_sleep = self.calculate_time_when_must_go_to_sleep()
+        self.Thread = Thread(target=self.run)
 
         self.start()
 
     def strfdelta(self, tdelta, fmt):
-        d = {"days": tdelta.days}
-        d["hours"], rem = divmod(tdelta.seconds, 3600)
-        d["minutes"], d["seconds"] = divmod(rem, 60)
+        d = {'days': tdelta.days}
+        d['hours'], rem = divmod(tdelta.seconds, 3600)
+        d['minutes'], d['seconds'] = divmod(rem, 60)
         return fmt.format(**d)
 
     def start(self):
@@ -56,7 +57,7 @@ class DreamControl:
         self.time_to_sleep = delta.seconds
         if not self.running:
             self.running = True
-            print("(модуль контроля сна активирован)")
+            print('(модуль контроля сна активирован)')
             self.Thread.start()
 
     def check(self):
@@ -66,14 +67,14 @@ class DreamControl:
         self.time_now = datetime.now()
         return self.strfdelta(
                     self.time_when_wake_up - self.time_now,
-                    fmt="{hours} часа(ов) и {minutes} минут(ы)"
+                    fmt='{hours} часа(ов) и {minutes} минут(ы)'
                 )
 
     def calculate_time_to_go_to_sleep(self):
         self.time_now = datetime.now()
         return self.strfdelta(
                     self.time_when_must_go_to_sleep - self.time_now,
-                    fmt="{hours} часа(ов) и {minutes} минут(ы)"
+                    fmt='{hours} часа(ов) и {minutes} минут(ы)'
                 )
 
     def calculate_time_when_must_go_to_sleep(self):
@@ -110,7 +111,7 @@ class DreamControl:
         while True:
             sleep(self.time_to_sleep)
             self.time_to_wake_up = self.calculate_time_to_wake_up()
-            print("Сер, спать осталось всего лишь", self.time_to_wake_up)
+            print('Сер, спать осталось всего лишь', self.time_to_wake_up)
             self.time_to_sleep = 1800
 
 

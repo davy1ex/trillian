@@ -1,4 +1,5 @@
 import os
+import platform
 
 from threading import Thread
 from datetime import datetime
@@ -11,9 +12,13 @@ from time import sleep
 # -- вывести уведомление об отключении за 5 минут
 #
 
+if '__main__' != __name__:
+    print('Модуль \"Shutdowner\" активирован')
+
 
 class ShutdownByTime:
     def __init__(self, time_when_power_off):
+
         self.running = False
         self.thread = Thread(target=self.run)
 
@@ -37,7 +42,15 @@ class ShutdownByTime:
     def check(self):
         sleep(int(self.time_to_shutdown()))
         # print('*выключил*')
-        os.system("shutdown -l")
+        # if os.name() == 'Linux':
+        #     os.system('poweroff')
+        # else:
+        #     os.system("shutdown -l")
+        name_os = platform.system()         # возвращает что-то типа -> "Windows"
+        if name_os == 'Linux':
+            os.system('poweroff')
+        else:
+            os.system('shutdown -l')
 
     def run(self):
         self.check()

@@ -1,9 +1,6 @@
 import bs4
 import requests
 import re
-import os
-from pprint import pprint
-from urllib3.connectionpool import InsecureRequestWarning
 
 
 class Parser:
