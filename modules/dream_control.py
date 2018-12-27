@@ -10,7 +10,7 @@ from test.true_parser import Parser
 
 #
 # ToDo:
-# -- если запуск просиходи позже время когда должен ложиться спать - сообщить об этом
+# -- если запуск просиходит позже времени когда должен ложиться спать - сообщить об этом
 #
 
 
@@ -47,6 +47,7 @@ class DreamControl:
         self.start()
 
     def strfdelta(self, tdelta, fmt):
+        # взято со stackowerflow
         d = {'days': tdelta.days}
         d['hours'], rem = divmod(tdelta.seconds, 3600)
         d['minutes'], d['seconds'] = divmod(rem, 60)
@@ -59,9 +60,6 @@ class DreamControl:
             self.running = True
             print('(модуль контроля сна активирован)')
             self.Thread.start()
-
-    def check(self):
-        pass
 
     def calculate_time_to_wake_up(self):
         self.time_now = datetime.now()
@@ -107,7 +105,7 @@ class DreamControl:
         return time_when_must_go_to_sleep
 
     def run(self):
-        print('Напомню вам в {}, что пора ложиться спать'.format(self.time_when_must_go_to_sleep.strftime('%H:%M')))
+        print('[Bot]: Напомню вам в {}, что пора ложиться спать'.format(self.time_when_must_go_to_sleep.strftime('%H:%M')))
         while True:
             sleep(self.time_to_sleep)
             self.time_to_wake_up = self.calculate_time_to_wake_up()

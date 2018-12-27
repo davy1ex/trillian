@@ -1,10 +1,10 @@
 from threading import Thread
 from random import choice
 
-from modules.shutdowner import ShutdownByTime
+from test.shutdowner import ShutdownByTime
 # from modules.dream_control import DreamControl
 from constants.phrases import phrases
-from modules.gui import MainWindow
+from test.gui import MainWindow
 
 
 class Bot(Thread):

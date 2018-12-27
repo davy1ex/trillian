@@ -41,11 +41,6 @@ class ShutdownByTime:
 
     def check(self):
         sleep(int(self.time_to_shutdown()))
-        # print('*выключил*')
-        # if os.name() == 'Linux':
-        #     os.system('poweroff')
-        # else:
-        #     os.system("shutdown -l")
         name_os = platform.system()         # возвращает что-то типа -> "Windows"
         if name_os == 'Linux':
             os.system('poweroff')
