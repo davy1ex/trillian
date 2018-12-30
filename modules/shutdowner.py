@@ -17,7 +17,7 @@ if '__main__' != __name__:
 
 
 class ShutdownByTime:
-    def __init__(self, time_when_power_off):
+    def __init__(self, time_when_power_off=None):
 
         self.running = False
         self.thread = Thread(target=self.run)
