@@ -30,7 +30,7 @@ class Executer:
     def do(self):
         while True:
             if self.user_input is not None:
-                print('Только что поступил запрос: \"{}\"'.format(self.user_input))
+                # print('Только что поступил запрос: \"{}\"'.format(self.user_input))
 
                 if 'выкл' in self.user_input:
                     self.shutdown_by_time(self.user_input.split()[2]).thread.start()

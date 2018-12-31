@@ -20,7 +20,7 @@ class ShutdownByTime:
     def __init__(self, time_when_power_off):
 
         self.running = False
-        self.thread = Thread(target=self.run)
+        # self.thread = Thread(target=self.run)
 
         self.time_when_poweroff = datetime(
             year=datetime.now().year,
@@ -31,13 +31,13 @@ class ShutdownByTime:
         )
 
     def run(self):
-        while True:
+        # while True:
             # не будет работать до момента когда надо выключить пекарню
-            sleep((self.time_when_poweroff - datetime.now()).seconds)
+        sleep((self.time_when_poweroff - datetime.now()).seconds)
 
-            # проверяет тип системы и выключает её
-            name_os = platform.system()  # возвращает что-то типа -> "Windows"
-            if name_os == 'Linux':
-                os.system('poweroff')
-            else:
-                os.system('shutdown -s')
+        # проверяет тип системы и выключает её
+        name_os = platform.system()  # возвращает что-то типа -> "Windows"
+        if name_os == 'Linux':
+            os.system('poweroff')
+        else:
+            os.system('shutdown -s')

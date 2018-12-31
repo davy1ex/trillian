@@ -30,8 +30,7 @@ class DreamController:
         hour_for_day_when_must_wake_up = time_now.hour
 
         # увеличивает день на +1, ЕСЛИ время больше 12 ночи, но меньше 6 утра
-        if not 00 <= time_now.hour <= 6:
-            hour_for_day_when_must_wake_up = time_now.day + 1
+        print(time_now.hour)
 
         self.default_time_when_must_wake_up = datetime(
             year=time_now.year,
@@ -41,6 +40,9 @@ class DreamController:
             minute=00,
             second=00
         )
+
+        if not (00 <= time_now.hour <= 6):
+            self.default_time_when_must_wake_up += timedelta(days=1)
 
         # создаю голос
         self.voice = Voice()

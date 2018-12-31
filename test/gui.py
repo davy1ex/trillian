@@ -1,48 +1,52 @@
-import tkinter as tk
-import os
+import sys
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore
 
 
-class MainWindow(tk.Frame):
-    def __init__(self, root):
-        super().__init__(root)
+class MainWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.init_ui()
 
-        self.init_main()
+    def init_ui(self):
+        self.setWindowTitle('Trillian')
+        self.resize(500, 320)
 
-    def init_main(self):
-        pass
+
+        self.text_field = QTextBrowser(self)
 
 
-class ChildWindow(tk.Frame):
-    def __init__(self, root):
-        super().__init__(root)
-        self.root = root
-        self.text_to_display = None
+        self.input_line = QLineEdit(self)
 
-    def shutdown_window(self, text_to_show):
-        self.text_to_display = text_to_show
 
-        self.root.title("helpAssistant")
-        self.root["bg"] = "black"
-        self.root.resizable(False, False)
-        lbl = tk.Label(text=self.text_to_display, bg="black", foreground="white", fg="lightgrey")
-        btn_ignore = tk.Button(text="Проигнорировать",
-                               activebackground="white",
-                               bg="black",
-                               foreground="white",
-                               command=lambda: self.root.destroy()
-                               )
-        btn_poweroff = tk.Button(text="Выключить компьютер",
-                                 activebackground="white",
-                                 bg="black",
-                                 foreground="white",
-                                 command=lambda: os.system("poweroff"),
-                                 # bd=2
-                                 )
+        vbox = QVBoxLayout(self)
+        vbox.addStretch(1)
 
-        lbl.pack(side=tk.TOP)
-        btn_ignore.pack()
-        btn_poweroff.pack()
+        vbox.addWidget(self.text_field)
+        vbox.addWidget(self.input_line)
 
-        self.root.update_idletasks()
-        self.root.overrideredirect(1)
-        self.root.wm_attributes("-topmost", 1)
+        vbox.addStretch(1)
+        self.setLayout(vbox)
+
+        self.text_field.resize(350, 170)
+        self.input_line.resize(350, 170)
+        # # self.setLayout(hbox)
+        # vbox.setAlignment(QtCore.Qt.AlignCenter)
+        # central_frame = QFrame(self) # .setFrameShape(QFrame.StyledPanel)
+        # central_frame.move(self.pos())
+        # bottom = QFrame(self)
+
+
+
+
+        # self.input_line(300, 22)
+
+
+        self.show()
+
+
+if '__main__' == __name__:
+    app = QApplication(sys.argv)
+    gui = MainWindow()
+    sys.exit(app.exec_())
+
