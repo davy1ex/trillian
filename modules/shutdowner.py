@@ -13,14 +13,14 @@ from time import sleep
 #
 
 if '__main__' != __name__:
-    print('Модуль \"Shutdowner\" активирован')
+    print('{0}: активирован'.format(__name__))
 
 
 class ShutdownByTime:
-    def __init__(self, time_when_power_off=None):
+    def __init__(self, time_when_power_off):
 
         self.running = False
-        self.thread = Thread(target=self.run)
+        # self.thread = Thread(target=self.run)
 
         self.time_when_poweroff = datetime(
             year=datetime.now().year,
@@ -30,22 +30,14 @@ class ShutdownByTime:
             minute=int(time_when_power_off[3:5]),
         )
 
-    def time_to_shutdown(self):
-        delta = self.time_when_poweroff - datetime.now()
+    def run(self):
+        # while True:
+            # не будет работать до момента когда надо выключить пекарню
+        sleep((self.time_when_poweroff - datetime.now()).seconds)
 
-        if not self.running:
-            self.running = True
-            self.thread.start()
-
-        return delta.seconds
-
-    def check(self):
-        sleep(int(self.time_to_shutdown()))
-        name_os = platform.system()         # возвращает что-то типа -> "Windows"
+        # проверяет тип системы и выключает её
+        name_os = platform.system()  # возвращает что-то типа -> "Windows"
         if name_os == 'Linux':
             os.system('poweroff')
         else:
-            os.system('shutdown -l')
-
-    def run(self):
-        self.check()
+            os.system('shutdown -s')
