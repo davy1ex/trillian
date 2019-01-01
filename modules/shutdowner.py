@@ -6,11 +6,11 @@ from datetime import datetime
 from time import sleep
 
 
-#
 # ToDO:
 # -- определить что это за система и какой к ней нужен подход
 # -- вывести уведомление об отключении за 5 минут
-#
+# -- добавить обработчик исключений на случай того, если руки начнут расти из жопы
+
 
 if '__main__' != __name__:
     print('{0}: активирован'.format(__name__))
@@ -18,10 +18,6 @@ if '__main__' != __name__:
 
 class ShutdownByTime:
     def __init__(self, time_when_power_off):
-
-        self.running = False
-        # self.thread = Thread(target=self.run)
-
         self.time_when_poweroff = datetime(
             year=datetime.now().year,
             month=datetime.now().month,
@@ -31,13 +27,12 @@ class ShutdownByTime:
         )
 
     def run(self):
-        # while True:
-            # не будет работать до момента когда надо выключить пекарню
+        # не будет работать до момента когда надо выключить пекарню
         sleep((self.time_when_poweroff - datetime.now()).seconds)
 
         # проверяет тип системы и выключает её
         name_os = platform.system()  # возвращает что-то типа -> "Windows"
-        if name_os == 'Linux':
+        if name_os == 'Linux':          # linux
             os.system('poweroff')
         else:
-            os.system('shutdown -s')
+            os.system('shutdown -s')    # windows

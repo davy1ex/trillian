@@ -1,3 +1,4 @@
+# просто красивый конец (начало?)
 from constants.phrases import phrases
 from modules.executer import Executer
 
