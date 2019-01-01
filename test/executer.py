@@ -7,7 +7,7 @@ from random import choice
 
 from test.shutdowner import ShutdownByTime
 from test.dream_control import DreamController
-from test.voice import Voice
+# from test.speak import say
 from test.terminal_methods import Terminal
 
 
@@ -17,7 +17,8 @@ class Executer:
         self.listen_thread = Thread(target=self.listen).start()
         self.do_thread = Thread(target=self.do).start()
 
-        self.voice = Voice()
+        # self.voice = say
+        # self.voice('hello')
         self.dream_control = DreamController()
         self.shutdown_by_time = ShutdownByTime
         self.terminal = Terminal()
@@ -30,8 +31,6 @@ class Executer:
     def do(self):
         while True:
             if self.user_input is not None:
-                # print('Только что поступил запрос: \"{}\"'.format(self.user_input))
-
                 if 'выкл' in self.user_input:
                     self.shutdown_by_time(self.user_input.split()[2]).thread.start()
                     self.terminal.print('Хорошо. Выключу в {}'.format(self.user_input.split()[2]))
@@ -47,7 +46,7 @@ class Executer:
                 elif 'сколько' in self.user_input or 'до сна' in self.user_input:
                     self.terminal.print(self.dream_control.get_time_for_awareness())
 
-                elif 'test' in self.user_input:
+                elif 'test' in self.user_input or 'тест' in self.user_input:
                     self.terminal.print('I\'m ok')
 
                 self.user_input = None

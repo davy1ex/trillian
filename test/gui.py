@@ -12,6 +12,8 @@ class MainWindow(QWidget):
         self.setWindowTitle('Trillian')
         self.resize(500, 320)
 
+        self.setStyleSheet("QWidget {background-image: url(2341.jpg) }")
+
 
         self.text_field = QTextBrowser(self)
 
@@ -30,6 +32,8 @@ class MainWindow(QWidget):
 
         self.text_field.resize(350, 170)
         self.input_line.resize(350, 170)
+
+
         # # self.setLayout(hbox)
         # vbox.setAlignment(QtCore.Qt.AlignCenter)
         # central_frame = QFrame(self) # .setFrameShape(QFrame.StyledPanel)
@@ -43,6 +47,7 @@ class MainWindow(QWidget):
 
 
         self.show()
+
 
 
 if '__main__' == __name__:

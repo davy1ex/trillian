@@ -2,19 +2,21 @@ from datetime import datetime, timedelta
 from threading import Thread
 from time import sleep
 
-from modules.voice import Voice
-
+# from test.voice import Voice
+from test.terminal_methods import Terminal
 # НадоСделать список:
 # -- оповещение, когда пора спать
-# -- если время больше того, когда я должен лечь спать - вывести напоминание, которое предложит выключить пекарню
+# -- если время больше того, когда я должен лечь
+#    спать - вывести напоминание, которое предложит выключить пекарню
+# -- убарть отсюда голос
+# -- переписать это говно
 
 if '__main__' != __name__:
-    print('Тестовый модуль контроля сна активирован.')
+    print('{0}: активирован'.format(__name__))
 
 
 class DreamController:
     def __init__(self):
-        # super().__init__()
         # задаёт переменные, отвечающие за распорядок дня (время)
 
         time_now = datetime.now()
@@ -30,7 +32,6 @@ class DreamController:
         hour_for_day_when_must_wake_up = time_now.hour
 
         # увеличивает день на +1, ЕСЛИ время больше 12 ночи, но меньше 6 утра
-        print(time_now.hour)
 
         self.default_time_when_must_wake_up = datetime(
             year=time_now.year,
@@ -45,7 +46,7 @@ class DreamController:
             self.default_time_when_must_wake_up += timedelta(days=1)
 
         # создаю голос
-        self.voice = Voice()
+        # self.voice = Voice()
 
         # блок, связанный с созданием потока и его первоначальной настройки
         self.running = False
@@ -70,7 +71,9 @@ class DreamController:
         # time_for_sleep = 5
         sleep(time_for_sleep)
         while True:
-            self.voice.talk_to_me('Сер, кажется вам пора спать')
+            # self.voice.talk_to_me('Сер, кажется вам пора спать')
+            Terminal().print('Кажется спать пора')
+
 
             # и заснуть на 30 минут, чтобы напомнить снова
             sleep(1800)

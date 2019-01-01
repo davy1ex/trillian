@@ -13,7 +13,7 @@ from time import sleep
 #
 
 if '__main__' != __name__:
-    print('Модуль \"Shutdowner\" активирован')
+    print('{0}: активирован'.format(__name__))
 
 
 class ShutdownByTime:

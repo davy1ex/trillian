@@ -1,4 +1,6 @@
-# import os
+import os
+import time
+from threading import Thread
 
 import pyttsx3
 # from gtts import gTTS
@@ -15,5 +17,24 @@ def talk_to_me(audio):
     # os.system('mp3 audio.mp3')
 
 
-if __name__ == '__main__':
-    talk_to_me('Здравствуйте, сер.')
+class Threader(Thread):
+    def __init__(self, *args, **kwargs):
+        Thread.__init__(self, *args, **kwargs)
+        self.daemon = True
+        self.start()
+
+    def run(self):
+        tts_engine = pyttsx3.init()
+        tts_engine.say(self._args)
+        tts_engine.runAndWait()
+
+def say(phrase):
+    my_test = phrase
+    my_thread = Threader(args=my_test)
+
+
+
+# for phrase in ['dude', 'hello', 'man']:
+#     print('говорю')
+#     say(phrase)
+#     time.sleep(0.1)

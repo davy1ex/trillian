@@ -1,3 +1,5 @@
+# вообще не отлажено
+
 import pyttsx3
 from threading import Thread
 
@@ -5,7 +7,7 @@ from threading import Thread
 # -- Реализовать рабочий код как для линукса, так и для винды
 
 if '__main__' != __name__:
-    print('Модуль \"Voice\" активирован')
+    print('{0}: активирован'.format(__name__))
 
 
 class Voice:
