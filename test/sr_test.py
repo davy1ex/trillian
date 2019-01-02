@@ -30,7 +30,7 @@ def execute_command(command):
 	elif 'сверни всё' in command or 'рабочий стол' in command:
 		os.system('wmctrl -k on')
 
-	elif 'разверни' in command:
+	elif 'обратно' in command:
 		os.system('wmctrl -k off')
 
 	elif 'привет' in command:
