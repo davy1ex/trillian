@@ -26,8 +26,8 @@ class DreamController:
             month=time_now.month,
             day=time_now.day,
             hour=22,
-            minute=00,
-            second=00
+            minute=0,
+            second=0
         )
 
         self.default_time_when_must_wake_up = datetime(
@@ -54,11 +54,12 @@ class DreamController:
         time_for_sleep = self.get_time_for_delay()
         sleep(time_for_sleep)
         while True:
-            Voice().talk_to_me('Сер, кажется вам пора спать')
+            Voice().say_to_me('Сер, кажется вам пора спать')
 
             # и заснуть на 30 минут, чтобы напомнить снова
             sleep(1800)
 
     def get_time_for_awareness(self):
         # возвращает время через сколько пора спать. Хз на кой я это реализовал, но пусть будет.
-        return round((self.default_time_when_must_go_sleep - datetime.now()).seconds / 3600, 1)
+        # return round((self.default_time_when_must_go_sleep - datetime.now()).seconds / 3600, 1)
+        return self.default_time_when_must_go_sleep - datetime.now()

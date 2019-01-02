@@ -25,14 +25,16 @@ class ShutdownByTime:
             hour=int(time_when_power_off[0:2]),
             minute=int(time_when_power_off[3:5]),
         )
+        Thread(target=self.run).start()
 
     def run(self):
-        # не будет работать до момента когда надо выключить пекарню
-        sleep((self.time_when_poweroff - datetime.now()).seconds)
+        while True:
+            # не будет работать до момента когда надо выключить пекарню
+            sleep((self.time_when_poweroff - datetime.now()).seconds)
 
-        # проверяет тип системы и выключает её
-        name_os = platform.system()  # возвращает что-то типа -> "Windows"
-        if name_os == 'Linux':          # linux
-            os.system('poweroff')
-        else:
-            os.system('shutdown -s')    # windows
+            # проверяет тип системы и выключает её
+            name_os = platform.system()  # возвращает что-то типа -> "Windows"
+            if name_os == 'Linux':          # linux
+                os.system('poweroff')                
+            else:
+                os.system('shutdown -s')    # windows
