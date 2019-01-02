@@ -45,7 +45,7 @@ class DreamController:
 
         # блок, связанный с созданием потока и его первоначальной настройкой и запуском
         self.running = False
-        Thread = Thread(target=self.run).start()
+        Thread(target=self.run).start()
 
     def get_time_for_delay(self):
         return (self.default_time_when_must_go_sleep - datetime.now()).seconds
