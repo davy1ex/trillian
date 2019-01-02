@@ -40,11 +40,11 @@ class Voice:
 			tts.save(self.sound_file_name)
 
 	def play_sound(self, sound_file_name):
-		# if platform.system() == 'Linux':
-		# 	system('mpg123 -q {0}'.format(sound_file_name))
-		# else:
-		# 	system('{0}'.format(self.text_to_speech))
-		playsound(sound_file_name)
+		if platform.system() == 'Linux':
+			system('mpg123 -q {0}'.format(sound_file_name))
+		else:
+			playsound(sound_file_name)
+		
 
 	def delete_sound(self, sound_file_name):
 		if self.sound_file_name != None:
