@@ -22,21 +22,29 @@
 #         Thread(target=engine.runAndWait).start()
 
 from os import system, listdir, remove
+import platform
 from gtts import gTTS
+from playsound import playsound
 
 
 class Voice:
 	def __init__(self):
 		self.sound_file_name = None
+		self.text_to_speech = None
 
-	def create_sound(self, text_to_speech, lang):	
+	def create_sound(self, text_to_speech, lang):
+		self.text_to_speech = text_to_speech	
 		if self.sound_file_name not in listdir():
-			self.sound_file_name = '{}.mp3'.format(text_to_speech.split(' ')[0])
+			self.sound_file_name = '{}.mp3'.format('sound')
 			tts=gTTS(text=text_to_speech, lang=lang)
 			tts.save(self.sound_file_name)
 
 	def play_sound(self, sound_file_name):
-		system('mpg123 -q {0}'.format(sound_file_name))
+		# if platform.system() == 'Linux':
+		# 	system('mpg123 -q {0}'.format(sound_file_name))
+		# else:
+		# 	system('{0}'.format(self.text_to_speech))
+		playsound(sound_file_name)
 
 	def delete_sound(self, sound_file_name):
 		if self.sound_file_name != None:

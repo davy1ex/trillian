@@ -35,8 +35,8 @@ class DreamController:
             month=time_now.month,
             day=time_now.hour,
             hour=6,
-            minute=00,
-            second=00
+            minute=0,
+            second=0
         )
 
         # увеличивает день на +1, ЕСЛИ время больше 6 утра (когда просыпаться пора)
