@@ -1,4 +1,5 @@
 # просто красивый конец (начало?)
+from os import listdir
 from constants.phrases import phrases
 from modules.executer import Executer
 

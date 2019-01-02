@@ -44,7 +44,6 @@ class Voice:
 			system('mpg123 -q {0}'.format(sound_file_name))
 		else:
 			playsound(sound_file_name)
-		
 
 	def delete_sound(self, sound_file_name):
 		if self.sound_file_name != None:
