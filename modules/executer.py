@@ -12,12 +12,6 @@ from modules.terminal_methods import Terminal
 
 class Executer:
     def __init__(self):
-        user_input = None
-        
-        # self.listen_thread = Thread(target=self.listen).start()
-        # self.do_thread = Thread(target=self.do).start()
-
-
         self.dream_control = DreamController()
         self.shutdown_by_time = ShutdownByTime        
         self.terminal = Terminal()
