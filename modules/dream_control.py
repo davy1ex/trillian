@@ -48,10 +48,10 @@ class DreamController:
         Thread(target=self.run).start()
 
     def get_time_for_delay(self):
-        if datetime.now().hour < 0:
-            delay = (self.default_time_when_must_go_sleep - datetime.now()).seconds
-        else:
+        if self.default_time_when_must_go_sleep.hour <= datetime.now().hour < self.default_time_when_must_wake_up.hour:
             delay = 0
+        else:
+            delay = (self.default_time_when_must_go_sleep - datetime.now()).seconds
         return delay
 
     def run(self):

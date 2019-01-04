@@ -27,6 +27,10 @@ from gtts import gTTS
 from playsound import playsound
 
 
+if '__main__' != __name__:
+	print('{0}: активирован'.format(__name__))
+
+
 class Voice:
 	def __init__(self):
 		self.sound_file_name = None
