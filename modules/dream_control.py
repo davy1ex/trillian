@@ -3,25 +3,22 @@ from threading import Thread
 from time import sleep
 
 from modules.voice import Voice
-from modules.terminal_methods import Terminal
 
 
-# НадоСделать список:
-# -- если время больше того, когда я должен лечь
-#    спать - вывести напоминание, которое предложит выключить пекарню
-# -- убарть отсюда голос
+# НадоСделать:
+# -- реализовать напоминание, которое предложит выключить пекарню
 
-
+# просто свистоперделка, выводящая при иморптировании что-то типа {название модуля} импортирован
 if '__main__' != __name__:
     print('{0}: активирован'.format(__name__))
 
 
 class DreamController:
     def __init__(self):
-        # задаёт переменные, отвечающие за распорядок дня (время)
-
+        """ устанавливает необходимые пепеменные """
+        # переменные, отвечающие за распорядок дня (время)
         time_now = datetime.now()
-        self.default_time_when_must_go_sleep = datetime(
+        self.default_time_when_must_go_sleep = datetime(            # отбой
             year=time_now.year,
             month=time_now.month,
             day=time_now.day,
@@ -30,7 +27,7 @@ class DreamController:
             second=0
         )
 
-        self.default_time_when_must_wake_up = datetime(
+        self.default_time_when_must_wake_up = datetime(             # подъём
             year=time_now.year,
             month=time_now.month,
             day=time_now.hour,
@@ -48,6 +45,9 @@ class DreamController:
         Thread(target=self.run).start()
 
     def get_time_for_delay(self):
+        """ вычисляет количество секунд для задержки:
+            ЕСЛИ не сплю, когда уже надо - оповещает об этом сразу
+            ИНАЧЕ время до того, пока не надо будет спать"""
         if self.default_time_when_must_go_sleep.hour <= datetime.now().hour < self.default_time_when_must_wake_up.hour:
             delay = 0
         else:
@@ -55,6 +55,8 @@ class DreamController:
         return delay
 
     def run(self):
+        """ останавливает выполнение (time.sleep() до нужного момента,
+            далее уведомляет, что пора спать и засыпает снова на 30 минут """
         time_for_sleep = self.get_time_for_delay()
         sleep(time_for_sleep)
         while True:
@@ -64,6 +66,5 @@ class DreamController:
             sleep(600)
 
     def get_time_for_awareness(self):
-        # возвращает время через сколько пора спать. Хз на кой я это реализовал, но пусть будет.
-        # return round((self.default_time_when_must_go_sleep - datetime.now()).seconds / 3600, 1)
+        """ возвращает время через сколько пора спать. Хз на кой мне это, но пусть будет """
         return self.default_time_when_must_go_sleep - datetime.now()

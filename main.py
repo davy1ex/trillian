@@ -1,5 +1,6 @@
 # просто красивый конец (начало?)
-from os import listdir
+# а также главный файл, который запускает всю программу
+
 from constants.phrases import phrases
 from modules.executer import Executer
 

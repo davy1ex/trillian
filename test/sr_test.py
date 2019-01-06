@@ -1,3 +1,6 @@
+# здесь готовится голосовое управление
+# хорошо всё готовится
+
 import os
 
 import speech_recognition as sr

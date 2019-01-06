@@ -1,49 +1,34 @@
-# # вообще не продумано
+# вообще не продумано
 
-# import pyttsx3
-# from threading import Thread
-
-# # СделатьЛист: :
-# # -- Реализовать рабочий код как для линукса, так и для винды
-# # -- Пихнуть это в поток (попытки предпринимаются, но пока лень)
-# # -- Переписать это говно
-
-# if '__main__' != __name__:
-#     print('{0}: активирован'.format(__name__))
-
-
-# class Voice:
-#     def __init__(self):
-#         pass
-
-#     def say_to_me(self, text_to_speech):
-#         engine = pyttsx3.init()
-#         engine.say(text_to_speech)
-#         Thread(target=engine.runAndWait).start()
+# СделатьЛист:
+# -- Переписать это в кроссплатформ
 
 from os import system, listdir, remove
 import platform
 from gtts import gTTS
 from playsound import playsound
 
-
+# просто свистоперделка, выводящая при иморптировании что-то типа "{название модуля} импортирован"
 if '__main__' != __name__:
 	print('{0}: активирован'.format(__name__))
 
 
 class Voice:
+	""" класс, который реализует синтез, воспроизведение, сохранение и удаление голоса """
 	def __init__(self):
+		""" создаёт необходимые переменные """
 		self.sound_file_name = None
-		self.text_to_speech = None
 
 	def create_sound(self, text_to_speech, lang):
-		self.text_to_speech = text_to_speech	
+		""" создаёт аудиофайл sound.mp3, при условии наличия интернета """
+		# (надо будет реалезовать оффлайн синтез (через pyttsx?)
 		if self.sound_file_name not in listdir():
-			self.sound_file_name = '{}.mp3'.format('sound')
-			tts=gTTS(text=text_to_speech, lang=lang)
+			self.sound_file_name = 'sound.mp3'
+			tts = gTTS(text=text_to_speech, lang=lang)
 			tts.save(self.sound_file_name)
 
 	def play_sound(self, sound_file_name):
+		""" проигрывает аудиофайл """
 		if platform.system() == 'Linux':
 			system('mpg123 -q {0}'.format(sound_file_name))
 		else:
