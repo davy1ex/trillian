@@ -30,7 +30,7 @@ def execute_command(command):
 	if 'заблоки' in command:
 		os.system('xflock4')
 
-	elif 'сверни всё' in command or 'рабочий стол' in command:
+	elif 'сверни всё' in command or 'рабочий стол' in command or 'сверни всё' in command:
 		os.system('wmctrl -k on')
 
 	elif 'обратно' in command:
@@ -49,9 +49,9 @@ def execute_command(command):
 		exit()
 
 
-while True:
-	execute_command(what_iam_say())
-	sleep(0.1)
+# while True:
+# 	execute_command(what_iam_say())
+# 	sleep(0.1)
 
 
 
