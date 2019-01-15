@@ -48,12 +48,10 @@ class DreamController:
         """ вычисляет количество секунд для задержки:
             ЕСЛИ не сплю, когда уже надо - оповещает об этом сразу
             ИНАЧЕ время до того, пока не надо будет спать"""
-        print(datetime.now(), self.default_time_when_must_go_to_sleep, self.default_time_when_must_wake_up)
         if self.default_time_when_must_go_to_sleep <= datetime.now():
             delay = 0
         else:
             delay = (self.default_time_when_must_go_to_sleep - datetime.now()).seconds
-        print('задержка = ', delay)
         return delay
 
     def run(self):
