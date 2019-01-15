@@ -4,12 +4,7 @@
 import sys
 
 from constants.phrases import phrases
-
-if len(sys.argv) > 1:
-    if 'test' in sys.argv[1]:
-        from modules.test.executer import Executer
-else:
-    from modules.executer import Executer
+from modules.executer import Executer
 
 
 class Trillian:
