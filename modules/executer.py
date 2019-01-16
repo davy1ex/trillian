@@ -6,6 +6,8 @@ from modules.shutdowner import ShutdownByTime
 from modules.dream_control import DreamController
 from modules.terminal_methods import Terminal
 
+from modules.test.minder import Minder
+
 
 # НадоСделать:
 # -- обработчик исключений (для выключения, например)
@@ -16,6 +18,8 @@ class Executer:
         self.dream_control = DreamController()
         self.shutdown_by_time = ShutdownByTime        
         self.terminal = Terminal()
+
+        self.minder = Minder()
 
         while True:
             self.do(self.listen())
@@ -46,6 +50,15 @@ class Executer:
             # та самая непонятно зачем функция, даже то, что ниже полезнее
             time = self.dream_control.get_time_for_awareness()
             self.terminal.print('{0} ч'.format(round(time.seconds / 3600, 1)))
+
+        elif 'запомни' in user_input:
+            self.minder.remember(user_input.split('запомни ')[1])
+
+        elif 'напомни' in user_input:
+            self.terminal.print(self.minder.remind())
+
+        elif 'очистить' in user_input or 'clear' in user_input:
+            self.minder.clear()
 
         elif 'test' in user_input or 'тест' in user_input:
             """ если всё работает, выводит, что работает """
