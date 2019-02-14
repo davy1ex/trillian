@@ -3,23 +3,20 @@
 from random import choice
 
 from modules.shutdowner import ShutdownByTime
-from modules.dream_control import DreamController
+# from modules.dream_control import DreamController                                     # улучшу позже
 from modules.terminal_methods import Terminal
 
-from modules.test.minder import Minder
 
-
-# НадоСделать:
+# Сделать:
 # -- обработчик исключений (для выключения, например)
+# -- запуск в фоне с приёмом ключей
 
 
 class Executer:
     def __init__(self):
-        self.dream_control = DreamController()
-        self.shutdown_by_time = ShutdownByTime        
+        # self.dream_control = DreamController()                                        # улучшу позже
+        self.shutdown_by_time = ShutdownByTime
         self.terminal = Terminal()
-
-        self.minder = Minder()
 
         while True:
             self.do(self.listen())
@@ -45,20 +42,11 @@ class Executer:
 
             self.terminal.print(was_choiced)
 
-        elif 'сколько' in user_input or 'до сна' in user_input:
-            """ выводит время на бодрствование """                              # формат: "4,5 ч"
-            # та самая непонятно зачем функция, даже то, что ниже полезнее
-            time = self.dream_control.get_time_for_awareness()
-            self.terminal.print('{0} ч'.format(round(time.seconds / 3600, 1)))
-
-        elif 'запомни' in user_input:
-            self.minder.remember(user_input.split('запомни ')[1])
-
-        elif 'напомни' in user_input:
-            self.terminal.print(self.minder.remind())
-
-        elif 'очистить' in user_input or 'clear' in user_input:
-            self.minder.clear()
+        # elif 'сколько' in user_input or 'до сна' in user_input:                          # улучшу позже 
+        #     """ выводит время на бодрствование """                                       # формат: "4,5 ч"
+        #     # та самая непонятно зачем функция, даже то, что ниже полезнее
+        #     time = self.dream_control.get_time_for_awareness()
+        #     self.terminal.print('{0} ч'.format(round(time.seconds / 3600, 1)))
 
         elif 'test' in user_input or 'тест' in user_input:
             """ если всё работает, выводит, что работает """
